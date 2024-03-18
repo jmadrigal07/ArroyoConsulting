@@ -27,7 +27,9 @@ choco install git -y
 choco install git.install --params "/GitAndUnixToolsOnPath" -y
 
 # Print system environment variables
-Get-ChildItem Env: | Format-Table -AutoSize
+$desktopPath = [System.Environment]::GetFolderPath([System.Environment+SpecialFolder]::Desktop)
+$outputFilePath = Join-Path -Path $desktopPath -ChildPath "output-process.log"
+Get-ChildItem Env: | Format-Table -AutoSize > $outputFilePath
 
 # Restart the VM (requires admin privileges)
 Restart-Computer -Force
